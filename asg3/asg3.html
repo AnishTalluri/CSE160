@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 3 - World Explorer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #controls h3 {
+            margin-top: 0;
+        }
+        #controls p {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        #status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        #status p {
+            margin: 3px 0;
+        }
+        .status-label {
+            color: #aaa;
+        }
+        .status-value {
+            color: #0f0;
+        }
+        #winMessage {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+            border: 3px solid #0f0;
+        }
+        #winMessage h1 {
+            margin: 0 0 20px 0;
+            color: #0f0;
+            font-size: 48px;
+            text-shadow: 0 0 10px #0f0;
+        }
+        #winMessage p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <h3>Controls:</h3>
+        <p><strong>Click canvas</strong> - Lock mouse for FPS controls</p>
+        <p><strong>Mouse</strong> - Look around (when locked)</p>
+        <p><strong>Click+Drag</strong> - Look around (when unlocked)</p>
+        <p><strong>WASD</strong> - Move</p>
+        <p><strong>QE</strong> - Rotate Left/Right</p>
+        <p style="border-top: 1px solid #999; margin-top: 10px; padding-top: 10px;"><strong>Advanced:</strong></p>
+        <p><strong>SPACE</strong> - Toggle Flying Mode</p>
+        <p><strong>CTRL</strong> - Fly Down (when flying)</p>
+        <p><strong>SHIFT</strong> - Sprint</p>
+        <p style="border-top: 1px solid #999; margin-top: 10px; padding-top: 10px;"><strong>Block Editing:</strong></p>
+        <p><strong>X</strong> - Place block in front</p>
+        <p><strong>Z</strong> - Remove block in front</p>
+        <p><strong>← →</strong> - Cycle wall textures</p>
+    </div>
+
+    <div id="status">
+        <p><span class="status-label">Position:</span> <span class="status-value" id="posDisplay">X: 16.0 Y: 1.0 Z: 18.0</span></p>
+        <p><span class="status-label">Mode:</span> <span class="status-value" id="modeDisplay">Normal</span></p>
+        <p><span class="status-label">Texture:</span> <span class="status-value" id="textureDisplay">Wall</span></p>
+        <p><span class="status-label">Blocks:</span> <span class="status-value" id="blockCount">0</span></p>
+        <p style="border-top: 1px solid #444; margin-top: 10px; padding-top: 10px;"><span class="status-label">Stats:</span> <span class="status-value" id="statsDisplay">Placed: 0 | Removed: 0</span></p>
+    </div>
+
+    <div id="winMessage">
+        <h1>🎉 YOU ESCAPED! 🎉</h1>
+        <p>Congratulations! You've reached the goal!</p>
+        <p id="winStats"></p>
+    </div>
+
+    <canvas id="webgl" width="800" height="800"></canvas>
+
+    <!-- Library files -->
+    <script src="lib/webgl-utils.js"></script>
+    <script src="lib/webgl-debug.js"></script>
+    <script src="lib/cuon-utils.js"></script>
+    <script src="lib/cuon-matrix.js"></script>
+
+    <!-- Our classes -->
+    <script src="Camera.js"></script>
+    <script src="Cube.js"></script>
+
+    <!-- Main program -->
+    <script src="asg3.js"></script>
+    
+    <script>
+        // Start the application when page loads
+        window.onload = function() {
+            main();
+        };
+    </script>
+</body>
+</html>
